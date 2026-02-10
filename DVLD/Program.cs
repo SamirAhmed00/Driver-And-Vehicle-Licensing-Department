@@ -1,3 +1,5 @@
+using DVLD.Infrastructure.DependencyInjection;
+using DVLD.Application.DependencyInjection;
 namespace DVLD
 {
     public class Program
@@ -8,6 +10,11 @@ namespace DVLD
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Register Infrastructure layer services, including Database Context, Unit of Work, and Repositories.
+            builder.Services.AddInfrastructure(builder.Configuration);
+            // Register Application layer services, including Business Logic Services and AutoMapper Profiles.
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 
